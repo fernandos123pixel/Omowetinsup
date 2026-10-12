@@ -41,13 +41,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* --- HIDE GOOGLE TRANSLATE UGLY BANNER --- */
-        body { top: 0 !important; }
-        .skiptranslate iframe { display: none !important; }
-        #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
-        .goog-text-highlight { background: none !important; box-shadow: none !important; }
-        #google_translate_element { display: none; } /* Hide default widget look */
-
         /* --- HEADER --- */
         .top-bar {
             display: flex;
@@ -71,32 +64,6 @@
 
         .top-bar .icon-btn:hover { background-color: #f1f3f4; }
         .top-bar svg { width: 24px; height: 24px; fill: var(--text-main); }
-
-        /* Language Switcher Button */
-        .lang-switcher {
-            background: none;
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-        .lang-switcher:hover {
-            background: var(--chip-bg);
-            border-color: var(--blue-primary);
-            color: var(--blue-primary);
-        }
-        .lang-switcher svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
 
         /* --- APP HERO --- */
         .app-header {
@@ -158,7 +125,7 @@
         .stat-value .star { color: #fbbc04; }
         .stat-label { font-size: 12px; color: var(--text-secondary); }
 
-        /* --- INSTALL BUTTON --- */
+        /* --- INSTALL --- */
         .install-section { padding: 0 20px 20px 20px; display: flex; gap: 12px; }
 
         .btn-install {
@@ -356,17 +323,12 @@
 
 <div class="app-container">
     
-    <!-- TOP HEADER -->
+    <!-- TOP HEADER (No language dropdown anymore) -->
     <header class="top-bar">
         <button class="icon-btn" aria-label="Back">
             <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
         </button>
-        <div style="display: flex; gap: 8px; align-items: center;">
-            <!-- Language Switcher -->
-            <button class="lang-switcher" onclick="showLangMenu()">
-                <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
-                <span id="currentLang">EN</span>
-            </button>
+        <div>
             <button class="icon-btn" aria-label="Bookmark">
                 <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/></svg>
             </button>
@@ -376,9 +338,6 @@
         </div>
     </header>
 
-    <!-- Hidden Google Translate widget container -->
-    <div id="google_translate_element" style="display:none;"></div>
-
     <!-- APP HERO -->
     <section class="app-header">
         <div class="app-icon">
@@ -387,7 +346,7 @@
         <div class="app-info">
             <h1 class="app-title">Venture Capital</h1>
             <p class="app-developer">Fernandos123pixel</p>
-            <p class="app-meta">Contains ads • In-app purchases</p>
+            <p class="app-meta" data-i18n="appMeta">Contains ads • In-app purchases</p>
         </div>
     </section>
 
@@ -395,15 +354,15 @@
     <section class="stats-row">
         <div class="stat-item">
             <span class="stat-value">4.6 <span class="star">★</span></span>
-            <span class="stat-label">248K reviews</span>
+            <span class="stat-label" data-i18n="statReviews">248K reviews</span>
         </div>
         <div class="stat-item">
             <span class="stat-value">3+</span>
-            <span class="stat-label">Rated for 3+</span>
+            <span class="stat-label" data-i18n="statRated">Rated for 3+</span>
         </div>
         <div class="stat-item">
             <span class="stat-value">12 MB</span>
-            <span class="stat-label">Size</span>
+            <span class="stat-label" data-i18n="statSize">Size</span>
         </div>
     </section>
 
@@ -412,14 +371,15 @@
         <a href="https://github.com/fernandos123pixel/Niceone/releases/download/v26.5.6/Venture_Capital_v26.5.6.APK" 
            download="Venture_Capital_v26.5.6.APK"
            class="btn-install" 
-           id="installBtn">
+           id="installBtn"
+           data-i18n="install">
            Install
         </a>
         <button class="btn-dropdown" aria-label="More install options">
             <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
         </button>
     </section>
-    <p class="install-note">Install on phone. More devices available.</p>
+    <p class="install-note" data-i18n="installNote">Install on phone. More devices available.</p>
 
     <!-- SCREENSHOTS -->
     <section class="screenshots-container">
@@ -428,17 +388,17 @@
             <div class="screen-content">
                 <div class="ss1-header">
                     <div>
-                        <div class="ss1-greeting">Welcome back,</div>
+                        <div class="ss1-greeting" data-i18n="welcomeBack">Welcome back,</div>
                         <div class="ss1-name">Alex Carter</div>
                     </div>
                     <div class="ss1-avatar"></div>
                 </div>
                 <div class="ss1-balance-card">
-                    <div class="ss1-balance-label">Total Balance</div>
+                    <div class="ss1-balance-label" data-i18n="totalBalance">Total Balance</div>
                     <div class="ss1-balance-amount">$24,850.00</div>
-                    <div class="ss1-balance-change">▲ 12.4% this month</div>
+                    <div class="ss1-balance-change" data-i18n="thisMonth">▲ 12.4% this month</div>
                 </div>
-                <div class="ss1-section-title">Performance</div>
+                <div class="ss1-section-title" data-i18n="performance">Performance</div>
                 <div class="ss1-chart">
                     <div class="ss1-bar" style="height: 40%;"></div>
                     <div class="ss1-bar" style="height: 60%;"></div>
@@ -448,7 +408,7 @@
                     <div class="ss1-bar" style="height: 90%;"></div>
                     <div class="ss1-bar" style="height: 70%;"></div>
                 </div>
-                <div class="ss1-section-title">Top Assets</div>
+                <div class="ss1-section-title" data-i18n="topAssets">Top Assets</div>
                 <div class="ss1-list-item">
                     <div>
                         <div class="ss1-list-label">Bitcoin</div>
@@ -468,11 +428,11 @@
 
         <div class="phone-screenshot">
             <div class="screen-content">
-                <div class="ss2-header">Watchlist</div>
+                <div class="ss2-header" data-i18n="watchlist">Watchlist</div>
                 <div class="ss2-tabs">
-                    <div class="ss2-tab active">Stocks</div>
-                    <div class="ss2-tab">Crypto</div>
-                    <div class="ss2-tab">Forex</div>
+                    <div class="ss2-tab active" data-i18n="stocks">Stocks</div>
+                    <div class="ss2-tab" data-i18n="crypto">Crypto</div>
+                    <div class="ss2-tab" data-i18n="forex">Forex</div>
                 </div>
                 <div class="ss2-stock-card">
                     <div class="ss2-stock-header">
@@ -508,39 +468,22 @@
                     </div>
                     <div class="ss2-price">$67,432</div>
                 </div>
-                <div class="ss2-stock-card">
-                    <div class="ss2-stock-header">
-                        <div class="ss2-stock-symbol">ETH</div>
-                        <div class="ss2-stock-change down">-1.25%</div>
-                    </div>
-                    <div class="ss2-stock-name">Ethereum</div>
-                    <div class="ss2-sparkline">
-                        <div class="bar" style="height: 80%;"></div>
-                        <div class="bar" style="height: 65%;"></div>
-                        <div class="bar down" style="height: 55%;"></div>
-                        <div class="bar down" style="height: 45%;"></div>
-                        <div class="bar down" style="height: 40%;"></div>
-                        <div class="bar down" style="height: 35%;"></div>
-                        <div class="bar down" style="height: 30%;"></div>
-                    </div>
-                    <div class="ss2-price">$3,245</div>
-                </div>
             </div>
         </div>
 
         <div class="phone-screenshot">
             <div class="screen-content">
                 <div class="ss3-header">
-                    <div class="ss3-title">Transactions</div>
-                    <div class="ss3-filter">Filter ▾</div>
+                    <div class="ss3-title" data-i18n="transactions">Transactions</div>
+                    <div class="ss3-filter" data-i18n="filter">Filter ▾</div>
                 </div>
                 <div class="ss3-tx-item">
                     <div class="ss3-tx-icon in">
                         <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
                     </div>
                     <div class="ss3-tx-info">
-                        <div class="ss3-tx-name">Deposit Received</div>
-                        <div class="ss3-tx-date">Today, 10:42 AM</div>
+                        <div class="ss3-tx-name" data-i18n="deposit">Deposit Received</div>
+                        <div class="ss3-tx-date" data-i18n="today">Today, 10:42 AM</div>
                     </div>
                     <div class="ss3-tx-amount in">+$500.00</div>
                 </div>
@@ -549,8 +492,8 @@
                         <svg viewBox="0 0 24 24"><path d="M12 20l1.41-1.41L7.83 13H20v-2H7.83l5.58-5.59L12 4l-8 8z"/></svg>
                     </div>
                     <div class="ss3-tx-info">
-                        <div class="ss3-tx-name">Bought BTC</div>
-                        <div class="ss3-tx-date">Today, 9:15 AM</div>
+                        <div class="ss3-tx-name" data-i18n="boughtBTC">Bought BTC</div>
+                        <div class="ss3-tx-date" data-i18n="today">Today, 10:42 AM</div>
                     </div>
                     <div class="ss3-tx-amount out">-$250.00</div>
                 </div>
@@ -559,30 +502,10 @@
                         <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
                     </div>
                     <div class="ss3-tx-info">
-                        <div class="ss3-tx-name">Dividend Payout</div>
-                        <div class="ss3-tx-date">Yesterday</div>
+                        <div class="ss3-tx-name" data-i18n="dividend">Dividend Payout</div>
+                        <div class="ss3-tx-date" data-i18n="yesterday">Yesterday</div>
                     </div>
                     <div class="ss3-tx-amount in">+$42.30</div>
-                </div>
-                <div class="ss3-tx-item">
-                    <div class="ss3-tx-icon out">
-                        <svg viewBox="0 0 24 24"><path d="M12 20l1.41-1.41L7.83 13H20v-2H7.83l5.58-5.59L12 4l-8 8z"/></svg>
-                    </div>
-                    <div class="ss3-tx-info">
-                        <div class="ss3-tx-name">Sold AAPL</div>
-                        <div class="ss3-tx-date">Yesterday</div>
-                    </div>
-                    <div class="ss3-tx-amount out">-$180.00</div>
-                </div>
-                <div class="ss3-tx-item">
-                    <div class="ss3-tx-icon in">
-                        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-                    </div>
-                    <div class="ss3-tx-info">
-                        <div class="ss3-tx-name">Referral Bonus</div>
-                        <div class="ss3-tx-date">Oct 8, 2026</div>
-                    </div>
-                    <div class="ss3-tx-amount in">+$25.00</div>
                 </div>
             </div>
         </div>
@@ -592,8 +515,8 @@
     <!-- ABOUT -->
     <div class="about-section">
         <div class="about-text-wrapper">
-            <span class="about-title">About this app</span>
-            <span class="about-description">Save for Tomorrow</span>
+            <span class="about-title" data-i18n="aboutApp">About this app</span>
+            <span class="about-description" data-i18n="saveTomorrow">Save for Tomorrow</span>
         </div>
         <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
     </div>
@@ -602,81 +525,167 @@
     <nav class="bottom-nav">
         <a href="#" class="nav-item">
             <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-            <span>Games</span>
+            <span data-i18n="games">Games</span>
         </a>
         <a href="#" class="nav-item active">
             <div class="nav-icon-bg">
                 <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
             </div>
-            <span>Apps</span>
+            <span data-i18n="apps">Apps</span>
         </a>
         <a href="#" class="nav-item">
             <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-            <span>Search</span>
+            <span data-i18n="search">Search</span>
         </a>
         <a href="#" class="nav-item">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-            <span>You</span>
+            <span data-i18n="you">You</span>
         </a>
     </nav>
 
 </div>
 
-<!-- Hidden Google Translate API -->
-<script type="text/javascript">
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,es,pt,fr,de,it,ar,hi,zh-CN,ja,ko,ru',
-        autoDisplay: false
-    }, 'google_translate_element');
-}
-
-// Auto-detect language and translate if needed
-window.addEventListener('load', function() {
-    const userLang = (navigator.language || navigator.userLanguage).toLowerCase().split('-')[0];
-    const supported = ['es', 'pt', 'fr', 'de', 'it', 'ar', 'hi', 'zh', 'ja', 'ko', 'ru'];
-    
-    if (supported.includes(userLang)) {
-        // Give the widget a moment to load, then trigger translation
-        setTimeout(function() {
-            const select = document.querySelector('.goog-te-combo');
-            if (select) {
-                select.value = userLang;
-                select.dispatchEvent(new Event('change'));
-                document.getElementById('currentLang').textContent = userLang.toUpperCase();
-            }
-        }, 1000);
-    }
-});
-
-// Manual language switcher
-function showLangMenu() {
-    const langs = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ar', 'hi', 'zh-CN', 'ja', 'ko', 'ru'];
-    const choice = prompt('Choose language:\n\n' + langs.map((l, i) => `${i + 1}. ${l.toUpperCase()}`).join('\n'), '');
-    if (choice && langs[parseInt(choice) - 1]) {
-        const selected = langs[parseInt(choice) - 1];
-        const select = document.querySelector('.goog-te-combo');
-        if (select) {
-            select.value = selected;
-            select.dispatchEvent(new Event('change'));
-            document.getElementById('currentLang').textContent = selected.toUpperCase().split('-')[0];
-        }
-    }
-}
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 <script>
+    // =============================================
+    // TRANSLATIONS — EN, ES, PT
+    // =============================================
+    const translations = {
+        en: {
+            appMeta: "Contains ads • In-app purchases",
+            statReviews: "248K reviews",
+            statRated: "Rated for 3+",
+            statSize: "Size",
+            install: "Install",
+            installNote: "Install on phone. More devices available.",
+            welcomeBack: "Welcome back,",
+            totalBalance: "Total Balance",
+            thisMonth: "▲ 12.4% this month",
+            performance: "Performance",
+            topAssets: "Top Assets",
+            watchlist: "Watchlist",
+            stocks: "Stocks",
+            crypto: "Crypto",
+            forex: "Forex",
+            transactions: "Transactions",
+            filter: "Filter ▾",
+            deposit: "Deposit Received",
+            boughtBTC: "Bought BTC",
+            dividend: "Dividend Payout",
+            today: "Today, 10:42 AM",
+            yesterday: "Yesterday",
+            aboutApp: "About this app",
+            saveTomorrow: "Save for Tomorrow",
+            games: "Games",
+            apps: "Apps",
+            search: "Search",
+            you: "You"
+        },
+        es: {
+            appMeta: "Contiene anuncios • Compras dentro de la app",
+            statReviews: "248K reseñas",
+            statRated: "Clasificado para 3+",
+            statSize: "Tamaño",
+            install: "Instalar",
+            installNote: "Instalar en el teléfono. Más dispositivos disponibles.",
+            welcomeBack: "Bienvenido,",
+            totalBalance: "Saldo Total",
+            thisMonth: "▲ 12,4% este mes",
+            performance: "Rendimiento",
+            topAssets: "Mejores Activos",
+            watchlist: "Lista de Seguimiento",
+            stocks: "Acciones",
+            crypto: "Cripto",
+            forex: "Divisas",
+            transactions: "Transacciones",
+            filter: "Filtrar ▾",
+            deposit: "Depósito Recibido",
+            boughtBTC: "Compró BTC",
+            dividend: "Pago de Dividendos",
+            today: "Hoy, 10:42 AM",
+            yesterday: "Ayer",
+            aboutApp: "Acerca de esta app",
+            saveTomorrow: "Ahorra para el Mañana",
+            games: "Juegos",
+            apps: "Apps",
+            search: "Buscar",
+            you: "Tú"
+        },
+        pt: {
+            appMeta: "Contém anúncios • Compras no app",
+            statReviews: "248K avaliações",
+            statRated: "Classificado para 3+",
+            statSize: "Tamanho",
+            install: "Instalar",
+            installNote: "Instalar no telefone. Mais dispositivos disponíveis.",
+            welcomeBack: "Bem-vindo,",
+            totalBalance: "Saldo Total",
+            thisMonth: "▲ 12,4% este mês",
+            performance: "Desempenho",
+            topAssets: "Melhores Ativos",
+            watchlist: "Lista de Observação",
+            stocks: "Ações",
+            crypto: "Cripto",
+            forex: "Câmbio",
+            transactions: "Transações",
+            filter: "Filtrar ▾",
+            deposit: "Depósito Recebido",
+            boughtBTC: "Comprou BTC",
+            dividend: "Pagamento de Dividendos",
+            today: "Hoje, 10:42",
+            yesterday: "Ontem",
+            aboutApp: "Sobre este app",
+            saveTomorrow: "Poupe para o Amanhã",
+            games: "Jogos",
+            apps: "Apps",
+            search: "Buscar",
+            you: "Você"
+        }
+    };
+
+    // =============================================
+    // APPLY TRANSLATIONS
+    // =============================================
+    function applyTranslations(lang) {
+        const t = translations[lang] || translations.en;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) el.textContent = t[key];
+        });
+        document.documentElement.lang = lang;
+    }
+
+    // =============================================
+    // AUTO-DETECT LANGUAGE
+    // =============================================
+    (function autoDetect() {
+        let saved = null;
+        try { saved = localStorage.getItem('venture_lang'); } catch(e) {}
+
+        if (saved && translations[saved]) {
+            applyTranslations(saved);
+            return;
+        }
+
+        const userLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        const langCode = userLang.split('-')[0];
+        const supported = ['en', 'es', 'pt'];
+        const detected = supported.includes(langCode) ? langCode : 'en';
+
+        applyTranslations(detected);
+    })();
+
+    // =============================================
+    // INSTALL BUTTON
+    // =============================================
     const installBtn = document.getElementById('installBtn');
-    
     installBtn.addEventListener('click', function(e) {
-        this.textContent = 'Downloading...';
+        const lang = document.documentElement.lang;
+        this.textContent = lang === 'es' ? 'Descargando...' : (lang === 'pt' ? 'Baixando...' : 'Downloading...');
         this.style.backgroundColor = '#e8f0fe';
         this.style.color = '#0056FF';
         
         setTimeout(() => {
-            this.textContent = 'Open';
+            this.textContent = lang === 'es' ? 'Abrir' : (lang === 'pt' ? 'Abrir' : 'Open');
         }, 3000);
     });
 </script>
