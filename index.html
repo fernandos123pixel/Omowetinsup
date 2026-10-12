@@ -41,6 +41,13 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
+        /* --- HIDE GOOGLE TRANSLATE UGLY BANNER --- */
+        body { top: 0 !important; }
+        .skiptranslate iframe { display: none !important; }
+        #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+        .goog-text-highlight { background: none !important; box-shadow: none !important; }
+        #google_translate_element { display: none; } /* Hide default widget look */
+
         /* --- HEADER --- */
         .top-bar {
             display: flex;
@@ -64,6 +71,32 @@
 
         .top-bar .icon-btn:hover { background-color: #f1f3f4; }
         .top-bar svg { width: 24px; height: 24px; fill: var(--text-main); }
+
+        /* Language Switcher Button */
+        .lang-switcher {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .lang-switcher:hover {
+            background: var(--chip-bg);
+            border-color: var(--blue-primary);
+            color: var(--blue-primary);
+        }
+        .lang-switcher svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
 
         /* --- APP HERO --- */
         .app-header {
@@ -212,7 +245,6 @@
             padding: 20px 14px 14px 14px;
         }
 
-        /* --- SCREENSHOT 1 --- */
         .ss1-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
         .ss1-greeting { font-size: 10px; color: #666; }
         .ss1-name { font-size: 14px; font-weight: 700; }
@@ -231,7 +263,6 @@
         .ss1-list-sub { font-size: 7px; color: #999; }
         .ss1-list-value { font-size: 9px; font-weight: 600; color: #00A86B; }
 
-        /* --- SCREENSHOT 2 --- */
         .ss2-header { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: #1a1a1a; }
         .ss2-tabs { display: flex; gap: 6px; margin-bottom: 12px; overflow: hidden; }
         .ss2-tab { font-size: 8px; padding: 4px 10px; border-radius: 20px; background: #eee; color: #666; white-space: nowrap; }
@@ -248,7 +279,6 @@
         .ss2-sparkline .bar.down { background: #EA4335; }
         .ss2-price { font-size: 11px; font-weight: 700; color: #1a1a1a; }
 
-        /* --- SCREENSHOT 3 --- */
         .ss3-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
         .ss3-title { font-size: 14px; font-weight: 700; }
         .ss3-filter { font-size: 8px; color: #0056FF; }
@@ -324,39 +354,6 @@
 </head>
 <body>
 
-    <!-- ============================================ -->
-    <!-- AUTO TRANSLATE: SPANISH & PORTUGUESE -->
-    <!-- ============================================ -->
-    <script>
-        (function autoTranslate() {
-            // Get the user's browser/device language (e.g. "es-ES", "pt-BR", "en-US")
-            const userLang = navigator.language || navigator.userLanguage || '';
-            const langCode = userLang.toLowerCase().split('-')[0]; // "es-ES" -> "es", "pt-BR" -> "pt"
-
-            // Safety: don't redirect if we're already on the translate page
-            if (window.location.href.includes('translate.google')) return;
-
-            // Languages we support auto-translation for
-            const supportedLanguages = {
-                'es': 'es',  // Spanish
-                'pt': 'pt'   // Portuguese
-            };
-
-            // If the user's device is in a supported language, redirect to Google Translate
-            if (supportedLanguages[langCode]) {
-                const currentUrl = window.location.href;
-                const translateUrl =
-                    'https://translate.google.com/translate?sl=en&tl=' +
-                    supportedLanguages[langCode] +
-                    '&u=' +
-                    encodeURIComponent(currentUrl);
-
-                window.location.href = translateUrl;
-            }
-        })();
-    </script>
-    <!-- ============================================ -->
-
 <div class="app-container">
     
     <!-- TOP HEADER -->
@@ -364,7 +361,12 @@
         <button class="icon-btn" aria-label="Back">
             <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
         </button>
-        <div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <!-- Language Switcher -->
+            <button class="lang-switcher" onclick="showLangMenu()">
+                <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+                <span id="currentLang">EN</span>
+            </button>
             <button class="icon-btn" aria-label="Bookmark">
                 <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/></svg>
             </button>
@@ -373,6 +375,9 @@
             </button>
         </div>
     </header>
+
+    <!-- Hidden Google Translate widget container -->
+    <div id="google_translate_element" style="display:none;"></div>
 
     <!-- APP HERO -->
     <section class="app-header">
@@ -404,7 +409,7 @@
 
     <!-- INSTALL -->
     <section class="install-section">
-        <a href="https://github.com/fernandos123pixel/Niceone/releases/download/v26.5.6/Venture_Capital.APK" 
+        <a href="https://github.com/fernandos123pixel/Niceone/releases/download/v26.5.6/Venture_Capital_v26.5.6.APK" 
            download="Venture_Capital_v26.5.6.APK"
            class="btn-install" 
            id="installBtn">
@@ -419,13 +424,12 @@
     <!-- SCREENSHOTS -->
     <section class="screenshots-container">
 
-        <!-- SCREENSHOT 1 -->
         <div class="phone-screenshot">
             <div class="screen-content">
                 <div class="ss1-header">
                     <div>
                         <div class="ss1-greeting">Welcome back,</div>
-                        <div class="ss1-name">Alexander</div>
+                        <div class="ss1-name">Alex Carter</div>
                     </div>
                     <div class="ss1-avatar"></div>
                 </div>
@@ -462,7 +466,6 @@
             </div>
         </div>
 
-        <!-- SCREENSHOT 2 -->
         <div class="phone-screenshot">
             <div class="screen-content">
                 <div class="ss2-header">Watchlist</div>
@@ -525,7 +528,6 @@
             </div>
         </div>
 
-        <!-- SCREENSHOT 3 -->
         <div class="phone-screenshot">
             <div class="screen-content">
                 <div class="ss3-header">
@@ -619,6 +621,51 @@
     </nav>
 
 </div>
+
+<!-- Hidden Google Translate API -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,es,pt,fr,de,it,ar,hi,zh-CN,ja,ko,ru',
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+
+// Auto-detect language and translate if needed
+window.addEventListener('load', function() {
+    const userLang = (navigator.language || navigator.userLanguage).toLowerCase().split('-')[0];
+    const supported = ['es', 'pt', 'fr', 'de', 'it', 'ar', 'hi', 'zh', 'ja', 'ko', 'ru'];
+    
+    if (supported.includes(userLang)) {
+        // Give the widget a moment to load, then trigger translation
+        setTimeout(function() {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = userLang;
+                select.dispatchEvent(new Event('change'));
+                document.getElementById('currentLang').textContent = userLang.toUpperCase();
+            }
+        }, 1000);
+    }
+});
+
+// Manual language switcher
+function showLangMenu() {
+    const langs = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ar', 'hi', 'zh-CN', 'ja', 'ko', 'ru'];
+    const choice = prompt('Choose language:\n\n' + langs.map((l, i) => `${i + 1}. ${l.toUpperCase()}`).join('\n'), '');
+    if (choice && langs[parseInt(choice) - 1]) {
+        const selected = langs[parseInt(choice) - 1];
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+            select.value = selected;
+            select.dispatchEvent(new Event('change'));
+            document.getElementById('currentLang').textContent = selected.toUpperCase().split('-')[0];
+        }
+    }
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
     const installBtn = document.getElementById('installBtn');
